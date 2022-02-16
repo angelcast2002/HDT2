@@ -13,16 +13,11 @@ public class Menu {
         Datos datos = new Datos();
 
         System.out.println("-- Calculadora PosFix --");
+        
 
         if (!Doc.exists()) {
-            try {
-                
-                System.out.println("No ha proporcionado ningun archivo, por favor proporcione uno");
-                
-            } catch (IOException e) {
-                //TODO: handle exception
-                System.out.println(e);
-            }
+            
+            System.out.println("No ha proporcionado ningun archivo, por favor proporcione uno");
             
         } else {
 

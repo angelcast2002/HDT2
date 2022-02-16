@@ -9,31 +9,31 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
     @Override
     public int count() {
         // TODO Auto-generated method stub
-        return 0;
+        return pila.size();
     }
 
     @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
-        return false;
+        return pila.isEmpty();
     }
 
     @Override
     public T peek() {
         // TODO Auto-generated method stub
-        return null;
+        return pila.peek();
     }
 
     @Override
     public T pull() {
         // TODO Auto-generated method stub
-        return null;
+        return pila.pop();
     }
 
     @Override
     public void push(T value) {
         // TODO Auto-generated method stub
-        
+        pila.push(value);
     }
 
     @Override
@@ -41,21 +41,108 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
         // TODO Auto-generated method stub
 
         String cadena = expresion;
-        Vector<Integer> operador = new Vector();
-        String [] partes = dato.split("|");
+        Vector<Integer> operacion = new Vector<>();
+        String [] partes = cadena.split("|");
         List<String> Partes = Arrays.asList(partes);
+        int num1 = 0, num2 = 0;
 
         for (int i = 0; i < Partes.size(); i++) {
-
+            try {
+                Character.isDigit(cadena.charAt(i));
+            } catch (Exception e) {
+                //TODO: handle exception
+                System.out.println("No puede ingresar lineas en blanco, revise su entrada e intente de nuevo");
+                System.exit(1);
+            }
             if (Character.isDigit(cadena.charAt(i))){
 
                 int num = Integer.parseInt(Partes.get(i));
-                operador.push(num);
+                operacion.push(num);
 
             }
-            
+
+            else if (Partes.get(i).equals("+")) {
+                try {
+
+                    num1 = operacion.pull();
+                    num2 = operacion.pull();
+
+                } catch (Exception FueraDeRango) {
+                    //TODO: handle exception
+                    System.out.println("No puede ingresar lineas en blanco");
+                    System.exit(1);
+                }
+                
+                int resultado = num1 + num2;
+                operacion.push(resultado);
+                if(pila.size()==1){
+                    break;
+                } 
+            }
+            else if (Partes.get(i).equals("-")) {
+                try {
+
+                    num1 = operacion.pull();
+                    num2 = operacion.pull();
+
+                } catch (Exception FueraDeRango) {
+                    //TODO: handle exception
+                    System.out.println("No puede ingresar lineas en blanco");
+                    System.exit(1);
+                }
+
+                int resultado = num1 - num2;
+                operacion.push(resultado); 
+                if(pila.size()==1){
+                    break;
+                }
+            }
+            else if (Partes.get(i).equals("*")) {
+                try {
+
+                    num1 = operacion.pull();
+                    num2 = operacion.pull();
+
+                } catch (Exception FueraDeRango) {
+                    //TODO: handle exception
+                    System.out.println("No puede ingresar lineas en blanco");
+                    System.exit(1);
+                }
+                int resultado = num1 * num2;
+                operacion.push(resultado); 
+                if(pila.size()==1){
+                    break;
+                }
+            }
+            else if (Partes.get(i).equals("/")) {
+                try {
+
+                    num1 = operacion.pull();
+                    num2 = operacion.pull();
+
+                } catch (Exception FueraDeRango) {
+                    //TODO: handle exception
+                    System.out.println("No puede ingresar lineas en blanco");
+                    System.exit(1);
+                }
+                try {
+                    int resultado = num2 / num1;
+                    operacion.push(resultado); 
+                } catch (Exception cero) {
+                    //TODO: handle exception
+                    System.out.println("No se puede dividir por cero, revise su entrada e intente de nuevo");
+                    System.exit(1);
+                }
+                if(pila.size()==1){
+                    break;
+                }
+                
+            }
+            else{
+                System.out.println("Caracter invalido, no se puede realizar la operacion");
+            }
         }
-        return 0;
+        return operacion.peek();
     }
 
     
