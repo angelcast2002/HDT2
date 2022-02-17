@@ -12,8 +12,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-
-
+/**
+ *
+ * @author caste
+ */
 public class Datos {
     
 
@@ -21,8 +23,13 @@ public class Datos {
     BufferedReader buffer;
     Vector <Integer> op = new Vector<Integer>();
 
+    /**
+     *
+     * @param datos
+     * @throws IOException
+     */
     public void leer(File datos) throws IOException{
-
+        //Con este metodo se lee el archivo donde se encuentran las expresiones matematicas
         String letra = "";
         String linea;
 
@@ -38,6 +45,7 @@ public class Datos {
             letra = buffer.readLine();
             linea = letra;
             int total = op.Evaluate(linea);
+            //aqui se van imprimiendo los resultados de las operaciones
             System.out.println("El total de la operacion " + cont + " es: " + total);
             
         }
