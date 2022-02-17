@@ -11,34 +11,59 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ *
+ * @author caste
+ * @param <T>
+ */
 public class Vector<T> implements IStack<T>, IPosfixCalc {
 
     Stack<T> pila = new Stack();
 
+    /**
+     *
+     * @return el valor del tamaño de la pila
+     */
     @Override
     public int count() {
         // TODO Auto-generated method stub
         return pila.size();
     }
 
+    /**
+     *
+     * @return true si la pila esta vacia
+     */
     @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
         return pila.isEmpty();
     }
 
+    /**
+     *
+     * @return regresa el valor del dato que se encuentre mas arriba
+     */
     @Override
     public T peek() {
         // TODO Auto-generated method stub
         return pila.peek();
     }
 
+    /**
+     *
+     * @return regresa el valor del dato mas arriba de la pila
+     */
     @Override
     public T pull() {
         // TODO Auto-generated method stub
         return pila.pop();
     }
 
+    /**
+     *
+     * @param value resultado de la operacion
+     */
     @Override
     public void push(T value) {
         // TODO Auto-generated method stub
@@ -50,14 +75,17 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
         // TODO Auto-generated method stub
 
         String cadena = expresion;
+        //creamos un String con los datos que se leyeron
         Vector<Integer> operacion = new Vector<>();
         String [] partes = cadena.split("|");
+        //se separa la cadena por carácteres
         List<String> Partes = Arrays.asList(partes);
         int num1 = 0, num2 = 0;
 
         for (int i = 0; i < Partes.size(); i++) {
             try {
                 Character.isDigit(cadena.charAt(i));
+                //verificamos si el caracter es un digito
             } catch (Exception e) {
                 //TODO: handle exception
                 System.out.println("No puede ingresar lineas en blanco, revise su entrada e intente de nuevo");
@@ -69,7 +97,7 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
                 operacion.push(num);
 
             }
-
+            //Buscamos coincidencia en los operandos para hacer las operaciones necesarias
             else if (Partes.get(i).equals("+")) {
                 try {
 
@@ -152,6 +180,7 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
             }
         }
         return operacion.peek();
+        //retornamos el valor del dato mas arriba de la pila
     }
 
     
