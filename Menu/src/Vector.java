@@ -128,7 +128,7 @@ public class Vector<T> implements IStack<T>, IPosfixCalc {
                     System.exit(1);
                 }
 
-                int resultado = num1 - num2;
+                int resultado = num2 - num1;
                 operacion.push(resultado); 
                 if(pila.size()==1){
                     break;
